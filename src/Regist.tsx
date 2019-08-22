@@ -6,7 +6,6 @@ import { styled } from "@material-ui/styles";
 
 
 interface Props {
-  nowTime: Date;
 }
 interface State {
   eventName: string;
