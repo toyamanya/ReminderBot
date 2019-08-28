@@ -3,7 +3,16 @@ import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { styled } from "@material-ui/styles";
-import { string } from "prop-types";
+
+import "date-fns"
+import DateFnsUtils from "@date-io/date-fns"
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
+//import { string } from "prop-types";
 
 
 // styledの一つ目の括弧はコンポーネント、二つ目の括弧はスタイル
@@ -36,6 +45,17 @@ const MyTextField = styled(TextField)({
   width: 400
 });
 
+const MyDatePicker = styled(KeyboardDatePicker)({
+  height: 60,
+  width: 400
+})
+
+const MyTimePicker = styled(KeyboardTimePicker)({
+  height: 60,
+  width: 400
+})
+
+
 
 export default function Regist() {
   const [eventName, setEventName] = useState<string>("");
@@ -45,6 +65,16 @@ export default function Regist() {
   const [postDayAndTime, setpostDayAndTime] = useState<string>("");
   const [channel, setchannel] = useState<string>("");
   const [channels, setchannels] = useState<string[]>(["general", "ramdom"]);
+
+  const [postDate, setPostDate] = React.useState<Date | null>(
+    new Date(),
+  );
+
+  const [eventDate, setEventDate] = React.useState<Date | null>(
+    new Date(),
+  );
+
+
 
   const channelList = channels.map((ch, i) => {
     return (
@@ -101,13 +131,36 @@ export default function Regist() {
           </div>
 
           <div>
-            <MyTextField
-              id="day"
-              label="イベントの日付"
-              value={eventDayAndTime}
-              onChange={e => seteventDayAndTime(e.target.value)}
-              margin="normal"
-            />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <div>
+                <MyDatePicker
+                  disableToolbar
+                  variant="dialog"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  id="date-picker-dialog"
+                  label="イベントの日付"
+                  value={postDate}
+                  onChange={setPostDate}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              </div>
+              <div>
+                <MyTimePicker
+                  margin="normal"
+                  id="time-picker"
+                  label="イベントの時間"
+                  value={postDate}
+                  onChange={setPostDate}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change time',
+                  }}
+                />
+              </div>
+            </MuiPickersUtilsProvider>
+
           </div>
 
           <div>
@@ -116,16 +169,6 @@ export default function Regist() {
               label="イベントの場所"
               value={place}
               onChange={e => setPlace(e.target.value)}
-              margin="normal"
-            />
-          </div>
-
-          <div>
-            <MyTextField
-              id="postDay"
-              label="投稿する日付"
-              value={postDayAndTime}
-              onChange={e => setpostDayAndTime(e.target.value)}
               margin="normal"
             />
           </div>
@@ -143,8 +186,56 @@ export default function Regist() {
             </MyTextField>
           </div>
 
+          <div>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <div>
+                <MyDatePicker
+                  disableToolbar
+                  variant="dialog"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  id="date-picker-dialog"
+                  label="投稿日付"
+                  value={postDate}
+                  onChange={setPostDate}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              </div>
+              <div>
+                <MyTimePicker
+                  margin="normal"
+                  id="time-picker"
+                  label="投稿時間"
+                  value={postDate}
+                  onChange={setPostDate}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change time',
+                  }}
+                />
+              </div>
+            </MuiPickersUtilsProvider>
+
+          </div>
         </form>
       </div>
     </CenterDiv>
   )
 }
+
+
+/*
+        < KeyboardDatePicker
+          margin="normal"
+          id="date-picker-dialog"
+          label="Date picker dialog"
+          format="MM/dd/yyyy"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+        */
+
