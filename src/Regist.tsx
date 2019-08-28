@@ -36,11 +36,12 @@ const MyTextField = styled(TextField)({
   width: 400
 });
 
-export default function Regist<>() {
+
+export default function Regist() {
   const [eventName, setEventName] = useState<string>("");
-  const [content, setContent] = useState<string>("");
+  const [content, setContent] = useState<string | null>("");
   const [eventDayAndTime, seteventDayAndTime] = useState<string>("");
-  const [place, setPlace] = useState<string>("");
+  const [place, setPlace] = useState<string | null>("");
   const [postDayAndTime, setpostDayAndTime] = useState<string>("");
   const [channel, setchannel] = useState<string>("");
   const [channels, setchannels] = useState<string[]>(["general", "ramdom"]);
@@ -59,91 +60,91 @@ export default function Regist<>() {
 
   const onclickRegist = () => {
     console.log("登録ページに移動します");
-
-
-    return (
-      <CenterDiv>
-        <div>
-          <MyButton color="red" onClick={onClickRoot}>
-            一覧ページ
-          </MyButton>
-          <MyButton color="blue" onClick={onclickRegist}>
-            登録ページ
-        </MyButton>
-        </div>
-
-        <h1>リマインダー登録</h1>
-
-        <div>
-          <form noValidate autoComplete="off">
-            <div>
-              <MyTextField
-                required
-                id="eventName"
-                label="イベント名(必須)"
-                value={eventName}
-                onChange={e => setEventName(e.target.value)}
-                margin="normal"
-              />
-            </div>
-
-            <div>
-              <MyTextField
-                id="config"
-                label="説明文"
-                value={content}
-                onChange={e => setContent(e.target.value)}
-                multiline
-                margin="normal"
-              />
-            </div>
-
-            <div>
-              <MyTextField
-                id="day"
-                label="イベントの日付"
-                value={eventDayAndTime}
-                onChange={e => seteventDayAndTime(e.target.value)}
-                margin="normal"
-              />
-            </div>
-
-            <div>
-              <MyTextField
-                id="place"
-                label="イベントの場所"
-                value={place}
-                onChange={e => setPlace(e.target.value)}
-                margin="normal"
-              />
-            </div>
-
-            <div>
-              <MyTextField
-                id="postDay"
-                label="投稿する日付"
-                value={postDayAndTime}
-                onChange={e => setpostDayAndTime(e.target.value)}
-                margin="normal"
-              />
-            </div>
-
-            <div>
-              <MyTextField
-                id="channel"
-                select
-                label="チャンネル"
-                value={channel}
-                onChange={e => setchannel(e.target.value)}
-                margin="normal"
-              >
-                {channelList}
-              </MyTextField>
-            </div>
-
-          </form>
-        </div>
-      </CenterDiv>
-    )
   }
+
+
+  return (
+    <CenterDiv>
+      <div>
+        <MyButton color="red" onClick={onClickRoot}>
+          一覧ページ
+          </MyButton>
+        <MyButton color="blue" onClick={onclickRegist}>
+          登録ページ
+        </MyButton>
+      </div>
+
+      <h1>リマインダー登録</h1>
+
+      <div>
+        <form noValidate autoComplete="off">
+          <div>
+            <MyTextField
+              required
+              id="eventName"
+              label="イベント名(必須)"
+              value={eventName}
+              onChange={e => setEventName(e.target.value)}
+              margin="normal"
+            />
+          </div>
+
+          <div>
+            <MyTextField
+              id="config"
+              label="説明文"
+              value={content}
+              onChange={e => setContent(e.target.value)}
+              multiline
+              margin="normal"
+            />
+          </div>
+
+          <div>
+            <MyTextField
+              id="day"
+              label="イベントの日付"
+              value={eventDayAndTime}
+              onChange={e => seteventDayAndTime(e.target.value)}
+              margin="normal"
+            />
+          </div>
+
+          <div>
+            <MyTextField
+              id="place"
+              label="イベントの場所"
+              value={place}
+              onChange={e => setPlace(e.target.value)}
+              margin="normal"
+            />
+          </div>
+
+          <div>
+            <MyTextField
+              id="postDay"
+              label="投稿する日付"
+              value={postDayAndTime}
+              onChange={e => setpostDayAndTime(e.target.value)}
+              margin="normal"
+            />
+          </div>
+
+          <div>
+            <MyTextField
+              id="channel"
+              select
+              label="チャンネル"
+              value={channel}
+              onChange={e => setchannel(e.target.value)}
+              margin="normal"
+            >
+              {channelList}
+            </MyTextField>
+          </div>
+
+        </form>
+      </div>
+    </CenterDiv>
+  )
 }
